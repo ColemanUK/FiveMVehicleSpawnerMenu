@@ -1,4 +1,2 @@
 # FiveM Vehicle Spawner Menu
-FiveM Spawner Menu
-Ace Perms
-Dependency: NativeUI
+Ace Permissions | Native UI
