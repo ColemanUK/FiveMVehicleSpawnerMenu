@@ -57,131 +57,150 @@ end)
 
 --Menu Pooling
 _menuPool = NativeUI.CreatePool()
-mainMenu = NativeUI.CreateMenu("Vehicle Menu", "~b~Donator Vehicle Menu")
-_menuPool:Add(mainMenu)
+menu = NativeUI.CreateMenu("Vehicle Menu", "~b~Donator Vehicle Menu")
+_menuPool:Add(menu)
 
 --Menu
 function DiscordMemberVehicleMenu(menu)
-    local subMenu = _menuPool:AddSubMenu(menu, "Discord Member Vehicles")
-    local subMenuVehicleModels = {}
-    for i, vehicle in pairs(Config.DiscordMemberVehicles) do
-        subMenuVehicleModels[i] = NativeUI.CreateItem(vehicle[0], "Spawn a " .. vehicle[0] .. "!")
+    if discordMemberVehiclesAllowed then
+        local subMenu = _menuPool:AddSubMenu(menu, "Discord Member Vehicles")
+        local subMenuVehicleModels = {}
+        local subMenuVehicleObjects = {}
+        for i, vehicle in pairs(Config.DiscordMemberVehicles) do
+            subMenuVehicleModels[i] = NativeUI.CreateItem(vehicle[1], "Spawn a " .. vehicle[1] .. "!")
+            subMenuVehicleObjects[i] = vehicle
+            
+            subMenu:AddItem(subMenuVehicleModels[i])
+        end
 
-        subMenu:AddItem(subMenuVehicleModels[i])
-    end
-
-    subMenu.OnItemSelect = function(Sender, Item, Index)
-        if Item == subMenuVehicleModels[Index] then
-            local vehicle = subMenuVehicleModels[index]
-            SpawnCar(vehicle[0], vehicle[1])
+        subMenu.OnItemSelect = function(Sender, Item, Index)
+            print(Index)
+            if Item == subMenuVehicleModels[Index] then
+                local vehicle = subMenuVehicleObjects[Index]
+                SpawnCar(vehicle[1], vehicle[2])
+            end
         end
     end
 end
 
 function WhitelistedMemberVehicleMenu(menu)
-    local subMenu = _menuPool:AddSubMenu(menu, "Whitelisted Member Vehicles")
-    local subMenuVehicleModels = {}
-    for i, vehicle in pairs(Config.WhitelistedMemberVehicles) do
-        subMenuVehicleModels[i] = NativeUI.CreateItem(vehicle[0], "Spawn a " .. vehicle[0] .. "!")
+    if whitelistedVehiclesAllowed then
+        local subMenu = _menuPool:AddSubMenu(menu, "Whitelisted Member Vehicles")
+        local subMenuVehicleModels = {}
+        local subMenuVehicleObjects = {}
 
-        subMenu:AddItem(subMenuVehicleModels[i])
-    end
+        for i, vehicle in pairs(Config.WhitelistedVehicles) do
+            subMenuVehicleModels[i] = NativeUI.CreateItem(vehicle[1], "Spawn a " .. vehicle[1] .. "!")
+            subMenuVehicleObjects[i] = vehicle
 
-    subMenu.OnItemSelect = function(Sender, Item, Index)
-        if Item == subMenuVehicleModels[Index] then
-            local vehicle = subMenuVehicleModels[index]
-            SpawnCar(vehicle[0], vehicle[1])
+            subMenu:AddItem(subMenuVehicleModels[i])
+        end
+
+        subMenu.OnItemSelect = function(Sender, Item, Index)
+            if Item == subMenuVehicleModels[Index] then
+                local vehicle = subMenuVehicleObjects[Index]
+                SpawnCar(vehicle[1], vehicle[2])
+            end
         end
     end
 end
 
 function ServerBoosterVehicleMenu(menu)
-    local subMenu = _menuPool:AddSubMenu(menu, "Server Booster Vehicles")
-    local subMenuVehicleModels = {}
-    for i, vehicle in pairs(Config.ServerBoosterVehicles) do
-        subMenuVehicleModels[i] = NativeUI.CreateItem(vehicle[0], "Spawn a " .. vehicle[0] .. "!")
+    if serverBoosterVehiclesAllowed then  
+        local subMenu = _menuPool:AddSubMenu(menu, "Server Booster Vehicles")
+        local subMenuVehicleModels = {}
+        local subMenuVehicleObjects = {}
 
-        subMenu:AddItem(subMenuVehicleModels[i])
-    end
+        for i, vehicle in pairs(Config.ServerBoosterVehicles) do
+            subMenuVehicleModels[i] = NativeUI.CreateItem(vehicle[1], "Spawn a " .. vehicle[1] .. "!")
+            subMenuVehicleObjects[i] = vehicle
 
-    subMenu.OnItemSelect = function(Sender, Item, Index)
-        if Item == subMenuVehicleModels[Index] then
-            local vehicle = subMenuVehicleModels[index]
-            SpawnCar(vehicle[0], vehicle[1])
+            subMenu:AddItem(subMenuVehicleModels[i])
+        end
+
+        subMenu.OnItemSelect = function(Sender, Item, Index)
+            if Item == subMenuVehicleModels[Index] then
+                local vehicle = subMenuVehicleObjects[Index]
+                SpawnCar(vehicle[1], vehicle[2])
+            end
         end
     end
 end
 
 function Tier1VehicleMenu(menu)
-    local subMenu = _menuPool:AddSubMenu(menu, "Tier 1 Vehicles")
-    local subMenuVehicleModels = {}
-    for i, vehicle in pairs(Config.Tier1Vehicles) do
-        subMenuVehicleModels[i] = NativeUI.CreateItem(vehicle[0], "Spawn a " .. vehicle[0] .. "!")
+    if tier1VehiclesAllowed then
+        local subMenu = _menuPool:AddSubMenu(menu, "Tier 1 Vehicles")
+        local subMenuVehicleModels = {}
+        local subMenuVehicleObjects = {}
 
-        subMenu:AddItem(subMenuVehicleModels[i])
-    end
+        for i, vehicle in pairs(Config.Tier1Vehicles) do
+            subMenuVehicleModels[i] = NativeUI.CreateItem(vehicle[1], "Spawn a " .. vehicle[1] .. "!")
+            subMenuVehicleObjects[i] = vehicle
 
-    subMenu.OnItemSelect = function(Sender, Item, Index)
-        if Item == subMenuVehicleModels[Index] then
-            local vehicle = subMenuVehicleModels[index]
-            SpawnCar(vehicle[0], vehicle[1])
+            subMenu:AddItem(subMenuVehicleModels[i])
+        end
+
+        subMenu.OnItemSelect = function(Sender, Item, Index)
+            if Item == subMenuVehicleModels[Index] then
+                local vehicle = subMenuVehicleObjects[Index]
+                SpawnCar(vehicle[1], vehicle[2])
+            end
         end
     end
 end
 
 function Tier2VehicleMenu(menu)
-    local subMenu = _menuPool:AddSubMenu(menu, "Tier 2 Vehicles")
-    local subMenuVehicleModels = {}
-    for i, vehicle in pairs(Config.Tier2Vehicles) do
-        subMenuVehicleModels[i] = NativeUI.CreateItem(vehicle[0], "Spawn a " .. vehicle[0] .. "!")
+    if tier2VehiclesAllowed then
+        local subMenu = _menuPool:AddSubMenu(menu, "Tier 2 Vehicles")
+        local subMenuVehicleModels = {}
+        local subMenuVehicleObjects = {}
 
-        subMenu:AddItem(subMenuVehicleModels[i])
-    end
+        for i, vehicle in pairs(Config.Tier2Vehicles) do
+            subMenuVehicleModels[i] = NativeUI.CreateItem(vehicle[1], "Spawn a " .. vehicle[1] .. "!")
+            subMenuVehicleObjects[i] = vehicle
 
-    subMenu.OnItemSelect = function(Sender, Item, Index)
-        if Item == subMenuVehicleModels[Index] then
-            local vehicle = subMenuVehicleModels[index]
-            SpawnCar(vehicle[0], vehicle[1])
+            subMenu:AddItem(subMenuVehicleModels[i])
         end
-    end
+
+        subMenu.OnItemSelect = function(Sender, Item, Index)
+            if Item == subMenuVehicleModels[Index] then
+                local vehicle = subMenuVehicleObjects[Index]
+                SpawnCar(vehicle[1], vehicle[2])
+            end
+        end
+    end 
 end
 
 function Tier3VehicleMenu(menu)
-    local subMenu = _menuPool:AddSubMenu(menu, "Tier 3 Vehicles")
-    local subMenuVehicleModels = {}
-    for i, vehicle in pairs(Config.Tier3Vehicles) do
-        subMenuVehicleModels[i] = NativeUI.CreateItem(vehicle[0], "Spawn a " .. vehicle[0] .. "!")
+    if tier3VehiclesAllowed then
+        local subMenu = _menuPool:AddSubMenu(menu, "Tier 3 Vehicles")
+        local subMenuVehicleModels = {}
+        local subMenuVehicleObjects = {}
 
-        subMenu:AddItem(subMenuVehicleModels[i])
-    end
+        for i, vehicle in pairs(Config.Tier3Vehicles) do
+            subMenuVehicleModels[i] = NativeUI.CreateItem(vehicle[1], "Spawn a " .. vehicle[1] .. "!")
+            subMenuVehicleObjects[i] = vehicle
 
-    subMenu.OnItemSelect = function(Sender, Item, Index)
-        if Item == subMenuVehicleModels[Index] then
-            local vehicle = subMenuVehicleModels[index]
-            SpawnCar(vehicle[0], vehicle[1])
+            subMenu:AddItem(subMenuVehicleModels[i])
         end
-    end
+
+        subMenu.OnItemSelect = function(Sender, Item, Index)
+            if Item == subMenuVehicleModels[Index] then
+                local vehicle = subMenuVehicleObjects[Index]
+                SpawnCar(vehicle[1], vehicle[2])
+            end
+        end
+    end 
 end
 
 --Display if allowed
-if discordMemberVehiclesAllowed then
-    DiscordMemberVehicleMenu(menu)
-end
-if whitelistedVehiclesAllowed then
-    WhitelistedMemberVehicleMenu(menu)
-end
-if serverBoosterVehiclesAllowed then
-    ServerBoosterVehicleMenu(menu)
-end
-if tier1VehiclesAllowed then
-    Tier1VehicleMenu(menu)
-end
-if tier2VehiclesAllowed then
-    Tier2VehicleMenu(menu)
-end
-if tier3VehiclesAllowed then
-    Tier3VehicleMenu(menu)
-end
+DiscordMemberVehicleMenu(menu)
+WhitelistedMemberVehicleMenu(menu)
+ServerBoosterVehicleMenu(menu)
+Tier1VehicleMenu(menu)
+Tier2VehicleMenu(menu)
+Tier3VehicleMenu(menu)
+_menuPool:MouseControlsEnabled(false)
 _menuPool:RefreshIndex()
 
 --Menu Opening
@@ -191,13 +210,13 @@ Citizen.CreateThread(function()
         _menuPool:ProcessMenus()
     
         if IsControlJustPressed(1, Config.Activationkey) then
-            mainMenu:Visible(not mainMenu:Visible())
+            menu:Visible(not menu:Visible())
         end
     end
 end)
 
 RegisterCommand(Config.ActivationCommand, function(source, args, rawCommand)
-    mainMenu:Visible(not mainMenu:Visible())
+    menu:Visible(not menu:Visible())
 end, false)
 
 --Dependency Code
