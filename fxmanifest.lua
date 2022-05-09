@@ -7,12 +7,14 @@ version '1.0.0'
 
 shared_script 'config.lua'
 
+client_script "@NativeUI/NativeUI.lua"
+
 client_scripts {
 	"menu.lua",
-    "@NativeUI/NativeUI.lua"
 }
 server_scripts {
 	"server.lua"
 }
+
 
 

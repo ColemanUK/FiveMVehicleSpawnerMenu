@@ -1,7 +1,7 @@
 RegisterServerEvent("discordMember.getIsAllowed")
 AddEventHandler("discordMember.getIsAllowed", function()
     if IsPlayerAceAllowed(source, Config.DiscordMemberAcePerm) then
-        TriggerClientEvent("discordMember.returnIsAllowed", source, true)
+        TriggerClientEvent("discordMember.returnIsAllowed", source, true, true)
     else
         TriggerClientEvent("discordMember.returnIsAllowed", source, false)
     end
